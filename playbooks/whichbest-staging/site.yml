@@ -1,19 +1,8 @@
 ---
-
-- name: Apply common configuration to all target nodes
-  hosts: all
-  user: ubuntu
-  sudo: yes
-  roles: 
-    - common
-
-- name: Install all the packages and stuff
+- name: Install packages
   hosts: whichbest
-  user: ubuntu
   sudo: yes
+  remote_user: ubuntu
+  gather_facts: True
   roles:
     - redis
-    # - nginx
-    # - nodejs
-    # - zeromq
-    # - deploy_thingy
