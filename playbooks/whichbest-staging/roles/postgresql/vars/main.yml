@@ -1,5 +1,6 @@
 ---
 # vars file for postgresql
+  postgresql_version: 9.4
   dbname: auth
   dbuser: postgres
   dbpassword: 12345678
