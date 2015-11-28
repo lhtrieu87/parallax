@@ -1,0 +1,7 @@
+---
+# vars file for postgresql
+  dbname: auth
+  dbuser: postgres
+  dbpassword: 12345678
+  locale: en_US.UTF-8
+  encoding: UTF-8

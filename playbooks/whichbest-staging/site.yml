@@ -6,3 +6,4 @@
   gather_facts: True
   roles:
     - redis
+    - postgresql
