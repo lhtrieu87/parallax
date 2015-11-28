@@ -1,17 +1,12 @@
 ---
-  - name: Install nodejs
-    apt: pkg=nodejs state=installed
-  - name: Install node-dev
-    apt: pkg=nodejs-dev state=installed
-  - name: Install npm
-    apt: pkg=npm state=installed
+  - name: add NodeSource repository for Node.js 4.0 (deb)
+    apt_repository: repo='deb https://deb.nodesource.com/node_4.x {{ ansible_distribution_release|lower }} main' state=present
+    when: (nodejs_version is defined)  and  nodejs_version|version_compare('4.0', '>=')
 
-# I've no idea if this is a good idea or not, but I've found some old things like it. 
+  - name: install Node.js with specific version
+    apt: name={{ item }}  update_cache=yes  state=present force=yes
+    with_items: [ "nodejs={{ nodejs_version }}*" ]
+    when: nodejs_version is defined
 
-  - name: Create symlink for legacy code node->nodejs
-    file: src=/usr/bin/nodejs dest=/usr/local/bin/node state=link
-    when: ansible_distribution_release == "saucy"
-
-  - name: Create symlink for legacy node platforms
-    file: src=/usr/bin/node dest=/usr/bin/nodejs state=link
-    when: ansible_distribution_release != "saucy"
+  # - name: Create symlink for legacy code node->nodejs
+  #   file: src=/usr/bin/nodejs dest=/usr/local/bin/node state=link
