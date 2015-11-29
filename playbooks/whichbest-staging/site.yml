@@ -8,4 +8,5 @@
     - redis
     - postgresql
     - mongodb
+    - nginx
     - nodejs
